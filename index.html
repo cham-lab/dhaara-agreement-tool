@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Dhaara Wellness — Influencer Agreement Generator</title>
+<style>
+  :root{
+    --green:#2F6B4F;
+    --green-dark:#204A37;
+    --cream:#FAF7F0;
+    --panel:#FFFFFF;
+    --border:#E3DDCB;
+    --text:#2A2A2A;
+    --muted:#7A7A7A;
+    --rust:#B5651D;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:'Segoe UI',Arial,sans-serif;background:var(--cream);color:var(--text);}
+  .topbar{
+    max-width:1180px;margin:0 auto;padding:26px 24px 14px;
+    display:flex;justify-content:space-between;align-items:baseline;
+    border-bottom:2px solid var(--green);
+  }
+  .topbar h1{font-size:22px;color:var(--green);margin:0;}
+  .topbar .tag{font-size:11px;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;}
+  .app{
+    max-width:1180px;margin:0 auto;padding:24px;
+    display:grid;grid-template-columns:360px 1fr;gap:26px;
+  }
+  @media (max-width:900px){.app{grid-template-columns:1fr;}}
+
+  .panel{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:20px 22px;}
+  .panel h2{
+    font-size:12.5px;color:var(--green);text-transform:uppercase;letter-spacing:.6px;
+    border-bottom:1.5px solid var(--green);padding-bottom:6px;margin:22px 0 12px;
+  }
+  .panel h2:first-of-type{margin-top:0;}
+  label{display:block;font-size:12px;color:var(--muted);margin:12px 0 4px;}
+  label:first-of-type{margin-top:0;}
+  select, input[type=text], input[type=date], textarea{
+    width:100%;padding:9px 10px;border:1px solid var(--border);border-radius:6px;
+    font-size:13.5px;font-family:inherit;background:#fff;color:var(--text);
+  }
+  textarea{resize:vertical;min-height:44px;}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .btnrow{display:flex;flex-direction:column;gap:8px;margin-top:22px;}
+  button{padding:11px;border-radius:6px;font-size:13.5px;font-weight:700;cursor:pointer;border:none;}
+  .btn-primary{background:var(--green);color:#fff;}
+  .btn-primary:hover{background:var(--green-dark);}
+  .btn-secondary{background:#fff;color:var(--green);border:1.5px solid var(--green);}
+  .btn-secondary:hover{background:#EEF5F0;}
+  .btn-ghost{background:transparent;color:var(--muted);border:1px solid var(--border);}
+  .btn-ghost:hover{background:#f2f2f2;}
+
+  .doc{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:44px 48px;}
+  .doc h1.brand{
+    text-align:center;font-size:26px;letter-spacing:1px;color:var(--green);margin:0 0 4px;font-family:Georgia,serif;
+  }
+  .doc .subtitle{text-align:center;font-size:13px;color:var(--muted);font-style:italic;margin-bottom:26px;}
+  .doc p{font-size:13.5px;line-height:1.75;margin:12px 0;}
+  .ph{color:var(--rust);font-style:italic;}
+  table.infotbl{width:100%;border-collapse:collapse;margin:14px 0 20px;}
+  table.infotbl td{
+    border:1px solid var(--border);padding:9px 14px;font-size:13.2px;
+  }
+  table.infotbl td.label{font-weight:700;background:#FAFAF5;width:38%;}
+  .sectionhead{
+    font-size:11.5px;font-weight:700;color:var(--green);text-transform:uppercase;
+    letter-spacing:.6px;margin:22px 0 8px;
+  }
+  .sig{margin-top:28px;font-size:13.5px;line-height:1.7;}
+  .ackbox{margin-top:36px;padding-top:16px;border-top:1px dashed #ccc;}
+  .acktitle{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin-bottom:14px;}
+  .ackrow{display:flex;align-items:flex-end;gap:10px;font-size:13.2px;margin:16px 0;}
+  .ackrow span:first-child{font-weight:700;white-space:nowrap;min-width:80px;}
+  .ackrow .line{flex:1;border-bottom:1px solid #999;min-height:16px;padding-bottom:2px;}
+  .footer-line{text-align:center;font-size:10.5px;color:#aaa;margin-top:36px;border-top:1px solid var(--border);padding-top:10px;}
+
+  @media print{
+    .panel{display:none;}
+    .topbar{display:none;}
+    .app{display:block;padding:0;}
+    .doc{border:none;padding:0;}
+    body{background:#fff;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <h1 id="headerCompany">Dhaara Wellness</h1>
+  <div class="tag">Influencer Agreement Generator</div>
+</div>
+
+<div class="app">
+
+  <!-- ===== LEFT PANEL ===== -->
+  <div class="panel">
+    <h2>Sender Company</h2>
+    <label>Company</label>
+    <select id="company">
+      <option value="Manveera">Manveera</option>
+      <option value="Dhaara Wellness" selected>Dhaara Wellness</option>
+      <option value="Moolika">Moolika</option>
+      <option value="Hyper Monk">Hyper Monk</option>
+      <option value="__custom">Other (type below)</option>
+    </select>
+    <input type="text" id="companyCustom" placeholder="Enter company name" style="display:none;margin-top:6px;">
+
+    <h2>Influencer & Deal Details</h2>
+    <label>Influencer Name</label>
+    <input type="text" id="name" placeholder="e.g. Dr. Arun Raj">
+
+    <label>Brand</label>
+    <select id="product">
+      <option>Manveera</option>
+      <option>Golden Lehya</option>
+      <option>Astra</option>
+      <option>Herbal Hair Oil</option>
+      <option>Herbal Shampoo</option>
+      <option>Facewash</option>
+      <option>Hypermonk Lehya</option>
+      <option value="__custom">Other (type below)</option>
+    </select>
+    <input type="text" id="productCustom" placeholder="Enter brand/product line" style="display:none;margin-top:6px;">
+
+    <label>Promotion Type</label>
+    <select id="promoType">
+      <option>Influencer Marketing & Digital Promotion</option>
+      <option>Influencer Marketing & Promotional Activities</option>
+      <option>Doctor Endorsement & Promotional Activities</option>
+      <option value="__custom">Other (type below)</option>
+    </select>
+    <input type="text" id="promoCustom" placeholder="Enter promotion type" style="display:none;margin-top:6px;">
+
+    <div class="row2">
+      <div>
+        <label>Agreed Amount (₹)</label>
+        <input type="text" id="amount" placeholder="e.g. 10000">
+      </div>
+      <div>
+        <label>No. of Videos</label>
+        <input type="text" id="numVideos" placeholder="e.g. 2">
+      </div>
+    </div>
+
+    <label>Amount in Words</label>
+    <input type="text" id="amountWords" placeholder="e.g. Ten Thousand">
+
+    <h2>Payee & Bank Details</h2>
+    <label>Address</label>
+    <textarea id="accAddress" placeholder="Full address"></textarea>
+    <label>Mobile Number</label>
+    <input type="text" id="accMobile" placeholder="+91 ...">
+    <div class="row2">
+      <div>
+        <label>Account No.</label>
+        <input type="text" id="accNo">
+      </div>
+      <div>
+        <label>Bank</label>
+        <input type="text" id="bankName">
+      </div>
+    </div>
+    <div class="row2">
+      <div>
+        <label>Branch</label>
+        <input type="text" id="branch">
+      </div>
+      <div>
+        <label>IFSC</label>
+        <input type="text" id="ifsc">
+      </div>
+    </div>
+    <label>Date</label>
+    <input type="date" id="letterDate">
+
+    <h2>Signed By</h2>
+    <div class="row2">
+      <div>
+        <label>Name</label>
+        <input type="text" id="senderName" placeholder="e.g. Fajas Muhammed">
+      </div>
+      <div>
+        <label>Designation</label>
+        <input type="text" id="senderDesig" placeholder="e.g. Media Manager">
+      </div>
+    </div>
+
+    <div class="btnrow">
+      <button class="btn-primary" onclick="render()">Generate Letter</button>
+      <button class="btn-secondary" onclick="window.print()">Print / Save as PDF</button>
+      <button class="btn-secondary" onclick="copyLetter()">Copy Letter Text</button>
+      <button class="btn-ghost" onclick="clearForm()">Clear</button>
+    </div>
+  </div>
+
+  <!-- ===== RIGHT PREVIEW ===== -->
+  <div class="doc" id="doc"></div>
+
+</div>
+
+<script>
+const companySel = document.getElementById('company');
+const companyCustom = document.getElementById('companyCustom');
+const productSel = document.getElementById('product');
+const productCustom = document.getElementById('productCustom');
+const promoSel = document.getElementById('promoType');
+const promoCustom = document.getElementById('promoCustom');
+
+function toggle(sel, custom){ custom.style.display = (sel.value === '__custom') ? 'block' : 'none'; }
+companySel.addEventListener('change', () => { toggle(companySel, companyCustom); document.getElementById('headerCompany').textContent = getSelectVal(companySel, companyCustom); });
+productSel.addEventListener('change', () => toggle(productSel, productCustom));
+promoSel.addEventListener('change', () => toggle(promoSel, promoCustom));
+
+document.getElementById('amount').addEventListener('input', () => {
+  const words = document.getElementById('amountWords');
+  if(!words.dataset.userEdited){
+    words.value = numberToWords(document.getElementById('amount').value);
+  }
+});
+document.getElementById('amountWords').addEventListener('input', function(){ this.dataset.userEdited = "1"; });
+
+function val(id){ return document.getElementById(id).value.trim(); }
+function ph(v, label){ return v ? v : `<span class="ph">[${label}]</span>`; }
+function plain(v, label){ return v ? v : `[${label}]`; }
+
+function getSelectVal(sel, custom){
+  return sel.value === '__custom' ? (custom.value.trim() || '__custom') : sel.value;
+}
+
+function fmtDate(v){
+  if(!v) return '';
+  const d = new Date(v + 'T00:00:00');
+  const dd = String(d.getDate()).padStart(2,'0');
+  const mm = String(d.getMonth()+1).padStart(2,'0');
+  return `${dd}/${mm}/${d.getFullYear()}`;
+}
+
+function numberToWords(numStr){
+  if(!numStr) return '';
+  let num = parseInt(numStr.toString().replace(/[^0-9]/g,''), 10);
+  if(isNaN(num) || num === 0) return '';
+  const ones = ['','One','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten',
+    'Eleven','Twelve','Thirteen','Fourteen','Fifteen','Sixteen','Seventeen','Eighteen','Nineteen'];
+  const tens = ['','','Twenty','Thirty','Forty','Fifty','Sixty','Seventy','Eighty','Ninety'];
+  function twoDigits(n){ return n < 20 ? ones[n] : tens[Math.floor(n/10)] + (n%10 ? ' ' + ones[n%10] : ''); }
+  function threeDigits(n){ return n < 100 ? twoDigits(n) : ones[Math.floor(n/100)] + ' Hundred' + (n%100 ? ' ' + twoDigits(n%100) : ''); }
+  let result = '';
+  const crore = Math.floor(num / 10000000); num %= 10000000;
+  const lakh = Math.floor(num / 100000); num %= 100000;
+  const thousand = Math.floor(num / 1000); num %= 1000;
+  const rest = num;
+  if(crore) result += threeDigits(crore) + ' Crore ';
+  if(lakh) result += threeDigits(lakh) + ' Lakh ';
+  if(thousand) result += threeDigits(thousand) + ' Thousand ';
+  if(rest) result += threeDigits(rest);
+  return result.trim();
+}
+
+function fmtAmount(a){
+  if(!a) return '';
+  const n = a.replace(/[^0-9]/g,'');
+  if(!n) return a;
+  return parseInt(n,10).toLocaleString('en-IN');
+}
+
+let lastPlain = '';
+
+function render(){
+  const company = getSelectVal(companySel, companyCustom);
+  document.getElementById('headerCompany').textContent = company;
+  const name = val('name');
+  const product = getSelectVal(productSel, productCustom);
+  const promo = getSelectVal(promoSel, promoCustom);
+  const amountRaw = val('amount');
+  const amountFmt = amountRaw ? `₹${fmtAmount(amountRaw)}/-` : '';
+  const amountWords = val('amountWords');
+  const numVideos = val('numVideos');
+  const date = fmtDate(val('letterDate'));
+  const accAddress = val('accAddress');
+  const accMobile = val('accMobile');
+  const accNo = val('accNo');
+  const ifsc = val('ifsc');
+  const bankName = val('bankName');
+  const branch = val('branch');
+  const senderName = val('senderName');
+  const senderDesig = val('senderDesig');
+
+  const html = `
+    <h1 class="brand">${company.toUpperCase()}</h1>
+    <div class="subtitle">Influencer Marketing Agreement — Brand: ${product || '[Brand]'}</div>
+
+    <p>Dear ${ph(name,'Influencer Name')},</p>
+    <p>Greetings from ${company}.</p>
+    <p>This is to officially confirm that ${company} has entered into an agreement with you for ${promo} activities.</p>
+    <p>As per our discussion and mutual understanding, the details are as follows:</p>
+
+    <table class="infotbl">
+      <tr><td class="label">Influencer Name</td><td>${ph(name,'Influencer Name')}</td></tr>
+      <tr><td class="label">Brand</td><td>${ph(product,'Brand')}</td></tr>
+      <tr><td class="label">Promotion Type</td><td>${promo}</td></tr>
+      <tr><td class="label">No. of Videos</td><td>${ph(numVideos,'No. of Videos')}</td></tr>
+      <tr><td class="label">Agreed Amount</td><td>${ph(amountFmt,'Amount')}${amountWords ? ` (Rupees ${amountWords} Only)` : ''}</td></tr>
+    </table>
+
+    <p>The payment will be processed to the following bank account after the successful completion of the agreed promotional activities:</p>
+
+    <div class="sectionhead">Payee Details</div>
+    <table class="infotbl">
+      <tr><td class="label">Name</td><td>${ph(name,'Influencer Name')}</td></tr>
+      <tr><td class="label">Address</td><td>${ph(accAddress,'Address')}</td></tr>
+      <tr><td class="label">Mobile</td><td>${ph(accMobile,'Mobile Number')}</td></tr>
+    </table>
+
+    <div class="sectionhead">Bank Details</div>
+    <table class="infotbl">
+      <tr><td class="label">Account No.</td><td>${ph(accNo,'Account No.')}</td></tr>
+      <tr><td class="label">Bank</td><td>${ph(bankName,'Bank')}</td></tr>
+      <tr><td class="label">Branch</td><td>${ph(branch,'Branch')}</td></tr>
+      <tr><td class="label">IFSC</td><td>${ph(ifsc,'IFSC')}</td></tr>
+    </table>
+
+    <p>Kindly ensure that all promotional deliverables are completed as per the agreed timeline and the guidelines shared by the company.</p>
+    <p>Please acknowledge this email as your confirmation of acceptance of the above terms.</p>
+    <p>We look forward to a successful collaboration.</p>
+
+    <div class="sig">
+      Warm Regards,<br>
+      ${ph(senderName,'Sender Name')}<br>
+      ${ph(senderDesig,'Designation')}<br>
+      ${company}<br>
+      Date: ${date || '__/__/____'}
+    </div>
+
+    <div class="ackbox">
+      <div class="acktitle">Acknowledged & Accepted by (Influencer)</div>
+      <div class="ackrow"><span>Signature:</span><span class="line"></span></div>
+      <div class="ackrow"><span>Name:</span><span class="line">${name}</span></div>
+      <div class="ackrow"><span>Date:</span><span class="line"></span></div>
+    </div>
+
+    <div class="footer-line">${company} · Generated via Vesino Ventures Agreement Tool</div>
+  `;
+  document.getElementById('doc').innerHTML = html;
+
+  lastPlain = `Dear ${plain(name,'Influencer Name')},
+
+Greetings from ${company}.
+
+This is to officially confirm that ${company} has entered into an agreement with you for ${promo} activities.
+
+As per our discussion and mutual understanding, the details are as follows:
+
+Influencer Name: ${plain(name,'Influencer Name')}
+Brand: ${plain(product,'Brand')}
+Promotion Type: ${promo}
+No. of Videos: ${plain(numVideos,'No. of Videos')}
+Agreed Amount: ${plain(amountFmt,'Amount')}${amountWords ? ` (Rupees ${amountWords} Only)` : ''}
+
+The payment will be processed to the following bank account after the successful completion of the agreed promotional activities:
+
+Name: ${plain(name,'Influencer Name')}
+Address: ${plain(accAddress,'Address')}
+Mobile: ${plain(accMobile,'Mobile Number')}
+
+Bank Details
+Account No.: ${plain(accNo,'Account No.')}
+Bank: ${plain(bankName,'Bank')}
+Branch: ${plain(branch,'Branch')}
+IFSC: ${plain(ifsc,'IFSC')}
+
+Kindly ensure that all promotional deliverables are completed as per the agreed timeline and the guidelines shared by the company.
+Please acknowledge this email as your confirmation of acceptance of the above terms.
+We look forward to a successful collaboration.
+
+Warm Regards,
+${plain(senderName,'Sender Name')}
+${plain(senderDesig,'Designation')}
+${company}
+Date: ${date || '__/__/____'}
+
+Acknowledged & Accepted by (Influencer)
+Signature: ___________________
+Name: ${name}
+Date: ___________________`;
+}
+
+function copyLetter(){
+  render();
+  navigator.clipboard.writeText(lastPlain).then(() => {
+    alert('Letter text copied to clipboard!');
+  });
+}
+
+function clearForm(){
+  document.querySelectorAll('input[type=text], textarea, input[type=date]').forEach(el => el.value = '');
+  document.getElementById('amountWords').dataset.userEdited = "";
+  render();
+}
+
+render();
+</script>
+</body>
+</html>
